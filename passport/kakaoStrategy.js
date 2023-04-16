@@ -27,9 +27,8 @@ module.exports = () => {
 							nick: profile.displayName,
 							snsId: profile.id,
 							provider: "kakao",
-							password: profile.id,
 						});
-						done(null, newUser);
+						done(null, newUser); // req.user에 저장
 					}
 				} catch (error) {
 					console.error(error);

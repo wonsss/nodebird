@@ -29,4 +29,18 @@ router.get(
 	}
 );
 
+// GET /auth/naver
+router.get("/naver", passport.authenticate("naver"));
+
+// GET /auth/naver/callback
+router.get(
+	"/naver/callback",
+	passport.authenticate("naver", {
+		failureRedirect: "/?loginError=네이버로그인 실패",
+	}),
+	(req, res) => {
+		res.redirect("/"); // 로그인 성공 시 '/' 로 이동
+	}
+);
+
 module.exports = router;

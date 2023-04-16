@@ -15,15 +15,15 @@ class User extends Sequelize.Model {
 				},
 				password: {
 					type: Sequelize.STRING(100),
-					allowNull: false,
+					allowNull: true,
 				},
 				provider: {
-					type: Sequelize.ENUM("local", "kakao"),
+					type: Sequelize.ENUM("local", "kakao", "naver"),
 					allowNull: false,
 					defaultValue: "local",
 				},
 				snsId: {
-					type: Sequelize.STRING(30),
+					type: Sequelize.STRING(255),
 					allowNull: true,
 				},
 			},

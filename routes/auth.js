@@ -43,4 +43,21 @@ router.get(
 	}
 );
 
+// GET /auth/google
+router.get(
+	"/google",
+	passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+// GET /auth/google/callback
+router.get(
+	"/google/callback",
+	passport.authenticate("google", {
+		failureRedirect: "/?loginError=구글로그인 실패",
+	}),
+	(req, res) => {
+		res.redirect("/"); // 로그인 성공 시 '/' 로 이동
+	}
+);
+
 module.exports = router;

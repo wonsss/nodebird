@@ -22,11 +22,6 @@ const sequelize = new Sequelize(
 );
 
 db.sequelize = sequelize;
-// db.User = User;
-// db.Post = Post;
-// db.Hashtag = Hashtag;
-
-// User.initiate(sequ)
 
 fs.readdirSync(__dirname) // models 폴더 안에 있는 파일들을 읽어옴
 	.filter(file => {

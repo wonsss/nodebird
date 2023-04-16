@@ -14,7 +14,13 @@ module.exports = () => {
 
 	passport.deserializeUser((id, done) => {
 		// deserializeUser: 매 요청 시 실행, passport.session() 미들웨어가 이 메서드 호출, serializeUser의 done의 두 번째 인수로 넘긴 데이터가 첫 번째 매개변수로 들어감
-		User.findOne({ where: { id } }) // id로 사용자 조회
+		User.findOne({
+			where: { id },
+			include: [
+				{ model: User, attributes: ["id", "nick"], as: "Followers" },
+				{ model: User, attributes: ["id", "nick"], as: "Followings" },
+			],
+		}) // id로 사용자 조회
 			.then(user => done(null, user)) // 조회한 정보를 req.user에 저장
 			.catch(err => done(err));
 	});

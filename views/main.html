@@ -27,6 +27,7 @@
 				<button id="twit-btn" type="submit" class="btn">짹짹</button>
 			</div>
 		</form>
+		<div id="my-id" hidden="true">{{user.id}}</div>
 	</div>
 	{% endif %}
 	<div class="twits">
@@ -43,6 +44,7 @@
 			/>
 			<input type="hidden" value="{{twit.id}}" class="twit-id" />
 			<div class="twit-author">{{twit.User.nick}}</div>
+			<div class="twit-follow">팔로우</div>
 			<div class="twit-content">{{twit.content}}</div>
 			{% if twit.img %}
 			<div class="twit-img"><img src="{{twit.img}}" alt="섬네일" /></div>
@@ -88,6 +90,8 @@
 								console.error(err);
 							});
 					}
+				} else {
+					alert("자기 자신을 팔로우할 수 없습니다.");
 				}
 			}
 		});

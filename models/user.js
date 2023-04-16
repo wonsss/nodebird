@@ -41,7 +41,7 @@ class User extends Sequelize.Model {
 	}
 
 	static associate(db) {
-		db.User.hasMany(db.Post); // User는 Post를 여러개 가질 수 있다. 1(User):N(Post)
+		db.User.hasMany(db.Post, { foreignKey: "userId", sourceKey: "id" }); // User는 Post를 여러개 가질 수 있다. 1(User):N(Post)
 		db.User.belongsToMany(db.User, {
 			// User는 User를 여러개 팔로잉 할 수 있다. N(User):M(User)
 			foreignKey: "followingId", // foreignKey는 중간 테이블에 들어갈 컬럼명

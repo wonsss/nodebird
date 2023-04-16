@@ -27,7 +27,7 @@ class Post extends Sequelize.Model {
 	}
 
 	static associate(db) {
-		db.Post.belongsTo(db.User); // Post는 User에 속해있다. 1(User):N(Post)
+		db.Post.belongsTo(db.User, { foreignKey: "userId", targetKey: "id" }); // Post는 User에 속해있다. 1(User):N(Post)
 		db.Post.belongsToMany(db.Hashtag, { through: "PostHashtag" }); // Post는 Hashtag를 여러개 가질 수 있다.  N(Post):M(Hashtag)
 	}
 }

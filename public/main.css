@@ -152,6 +152,7 @@ textarea {
 	color: crimson;
 	font-size: 12px;
 	cursor: pointer;
+	width: 50px;
 }
 .twit-img {
 	text-align: center;

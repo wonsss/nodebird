@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 
 class Hashtag extends Sequelize.Model {
-	static init(sequelize) {
-		return super.init(
+	static initiate(sequelize) {
+		Hashtag.init(
 			{
 				title: {
 					type: Sequelize.STRING(15),

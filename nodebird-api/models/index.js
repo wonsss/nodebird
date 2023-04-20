@@ -1,15 +1,10 @@
-"use strict";
-
+const Sequelize = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const Sequelize = require("sequelize");
-const process = require("process");
-const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.js")[env];
+const config = require("../config/config")[env];
 
 const db = {};
-
 const sequelize = new Sequelize(
 	config.database,
 	config.username,
@@ -19,9 +14,10 @@ const sequelize = new Sequelize(
 
 db.sequelize = sequelize;
 
-fs.readdirSync(__dirname) // models 폴더 안에 있는 파일들을 읽어옴
+const basename = path.basename(__filename);
+fs.readdirSync(__dirname) // 현재 폴더의 모든 파일을 조회
 	.filter(file => {
-		// 숨감파일, index.js, .js 확장자가 아닌 파일 필터링
+		// 숨김 파일, index.js, js 확장자가 아닌 파일 필터링
 		return (
 			file.indexOf(".") !== 0 &&
 			file !== basename &&
@@ -29,9 +25,12 @@ fs.readdirSync(__dirname) // models 폴더 안에 있는 파일들을 읽어옴
 		);
 	})
 	.forEach(file => {
-		// 해당 파일의 모델을 불러와서 init
+		// 해당 파일의 모델 불러와서 init
 		const model = require(path.join(__dirname, file));
-		db[model.name] = model.init(sequelize);
+		db[model.name] = model;
+		console.log(file, model.name);
+
+		model.initiate(sequelize);
 	});
 
 Object.keys(db).forEach(modelName => {

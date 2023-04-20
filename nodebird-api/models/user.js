@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 
 class User extends Sequelize.Model {
-	static init(sequelize) {
-		return super.init(
+	static initiate(sequelize) {
+		User.init(
 			{
 				email: {
 					type: Sequelize.STRING(40),
@@ -54,6 +54,7 @@ class User extends Sequelize.Model {
 			as: "Followings", // Followings를 찾으러면 followerId를 찾아야 한다.
 			through: "Follow", // 중간 테이블
 		});
+		db.User.hasMany(db.Domain); // User는 Domain을 여러개 가질 수 있다. 1(User):N(Domain)
 	}
 }
 

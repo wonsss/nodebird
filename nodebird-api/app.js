@@ -8,7 +8,6 @@ const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
 
 dotenv.config();
-
 const authRouter = require("./routes/auth");
 const indexRouter = require("./routes");
 const { sequelize } = require("./models");
@@ -22,11 +21,10 @@ nunjucks.configure("views", {
 	express: app,
 	watch: true,
 });
-
 sequelize
 	.sync({ force: false })
 	.then(() => {
-		console.log("DB connection success.");
+		console.log("데이터베이스 연결 성공");
 	})
 	.catch(err => {
 		console.error(err);
@@ -48,7 +46,6 @@ app.use(
 		},
 	})
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -56,7 +53,7 @@ app.use("/auth", authRouter);
 app.use("/", indexRouter);
 
 app.use((req, res, next) => {
-	const error = new Error(`${req.method} ${req.url} router is not exist.`);
+	const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
 	error.status = 404;
 	next(error);
 });
@@ -69,5 +66,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(app.get("port"), () => {
-	console.log(app.get("port"), "번 포트에서 대기 중");
+	console.log(app.get("port"), "번 포트에서 대기중");
 });

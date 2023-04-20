@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 
 class Post extends Sequelize.Model {
-	static init(sequelize) {
-		return super.init(
+	static initiate(sequelize) {
+		Post.init(
 			{
 				content: {
 					type: Sequelize.STRING(140),
